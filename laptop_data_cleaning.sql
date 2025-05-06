@@ -19,7 +19,7 @@ SELECT * FROM laptop_backup;                                                -- B
 SELECT * FROM information_schema.TABLES                                    -- DATA LENGTH (SIZE) = 272 KB
 WHERE TABLE_SCHEMA = 'practice' AND TABLE_NAME = 'laptop_data';  
 
-SELECT COUNT(*)                                                            -- 1303 ROWS
+SELECT COUNT(*)                                                            -- 1303 ROWS LEFT
 FROM laptop_data;
 
 
@@ -77,7 +77,7 @@ DELETE FROM laptop_data
 WHERE sr_no IN (SELECT sr_no FROM empty_rows);
 
 
-SELECT COUNT(*)                                                            -- 1273 remaining rows 
+SELECT COUNT(*)                                                            -- 1273 ROWS LEFT
 FROM laptop_data;   
 
 -----------------------------------------
@@ -95,7 +95,7 @@ DELETE FROM laptop_data
 WHERE sr_no NOT IN (SELECT min_index FROM duplicate_row);
 
 
-SELECT * FROM laptop_data;                                                -- 1244 rows remaining
+SELECT * FROM laptop_data;                                                -- 1244 ROWS LEFT
 
 
 
@@ -245,7 +245,7 @@ ON t1.sr_no = t2.sr_no
 SET  Cpu_brand = t2.brand ;
 
 
-UPDATE laptop_data t1                                                                  -- EXTRACT CPU SPEED FROM CPU COLUMN AND FILL INTO cpu_speed COLUMN
+UPDATE laptop_data t1                                                                 -- EXTRACT CPU SPEED FROM CPU COLUMN AND FILL INTO cpu_speed COLUMN
 JOIN (
 	  SELECT sr_no, REPLACE(SUBSTRING_INDEX(Cpu," ",-1),"GHz","") AS speed
 	  FROM laptop_data
